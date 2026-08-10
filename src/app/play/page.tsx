@@ -40,7 +40,7 @@ export default function PlayPage() {
       </header>
 
       <div className="flex flex-col items-center text-center mb-8">
-        <div className="relative w-40 h-24 sm:w-48 sm:h-28 mb-2">
+        <div className="relative w-56 h-32 sm:w-64 sm:h-36">
           <Image
             src="/images/nightmain.png"
             alt="Nightfall Pain"
@@ -49,13 +49,6 @@ export default function PlayPage() {
             priority
           />
         </div>
-        <h1
-          className="text-glow text-3xl sm:text-4xl tracking-wide"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          <span className="text-[var(--cyan)]">NIGHTFALL</span>{" "}
-          <span className="text-[var(--magenta)] italic">PAIN</span>
-        </h1>
       </div>
 
       <main className="flex-1 flex flex-col lg:flex-row items-start justify-center gap-6 max-w-6xl mx-auto w-full">
