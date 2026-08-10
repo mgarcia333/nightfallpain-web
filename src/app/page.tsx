@@ -78,7 +78,7 @@ export default function Home() {
             JUGAR AHORA
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/mgarcia333/nightfallpain"
             target="_blank"
             rel="noreferrer"
             className="px-10 py-4 text-lg tracking-wide text-white/80 border border-white/20 rounded-sm hover:border-[var(--accent)] hover:text-[var(--accent)] transition text-center"
