@@ -42,7 +42,7 @@ export default function PlayPage() {
       <div className="flex flex-col items-center text-center mb-8">
         <div className="relative w-56 h-32 sm:w-64 sm:h-36">
           <Image
-            src="/images/nightmain.png"
+            src="/images/nightmain.webp"
             alt="Nightfall Pain"
             fill
             className="object-contain drop-shadow-[0_0_20px_rgba(255,46,196,0.4)]"

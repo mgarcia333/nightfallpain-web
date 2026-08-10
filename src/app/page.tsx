@@ -39,7 +39,7 @@ export default function Home() {
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10 opacity-40"
           style={{
-            backgroundImage: "url(/images/fondowin.png)",
+            backgroundImage: "url(/images/fondowin.webp)",
             backgroundSize: "cover",
             backgroundPosition: "center",
             maskImage: "radial-gradient(circle at 50% 30%, black 0%, transparent 70%)",
@@ -48,7 +48,7 @@ export default function Home() {
 
         <div className="relative w-72 h-40 sm:w-96 sm:h-52">
           <Image
-            src="/images/nightmain.png"
+            src="/images/nightmain.webp"
             alt="Nightfall Pain"
             fill
             className="object-contain drop-shadow-[0_0_25px_rgba(255,46,196,0.45)]"
