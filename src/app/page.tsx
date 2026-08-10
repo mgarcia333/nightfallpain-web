@@ -46,7 +46,7 @@ export default function Home() {
           }}
         />
 
-        <div className="relative w-56 h-32 sm:w-72 sm:h-40 mb-4">
+        <div className="relative w-72 h-40 sm:w-96 sm:h-52">
           <Image
             src="/images/nightmain.png"
             alt="Nightfall Pain"
@@ -55,14 +55,6 @@ export default function Home() {
             priority
           />
         </div>
-
-        <h1
-          className="text-glow text-4xl sm:text-6xl tracking-wide"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          <span className="text-[var(--cyan)]">NIGHTFALL</span>{" "}
-          <span className="text-[var(--magenta)] italic">PAIN</span>
-        </h1>
 
         <p className="mt-6 max-w-xl text-base sm:text-lg text-white/70">
           Un shooter 2D cyberpunk sobre sobrevivir a la noche. Sin instalar nada,

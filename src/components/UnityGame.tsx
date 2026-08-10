@@ -47,9 +47,9 @@ export default function UnityGame() {
         .createUnityInstance(
           canvas,
           {
-            dataUrl: `${BUILD_URL}/${BUILD_NAME}.data`,
-            frameworkUrl: `${BUILD_URL}/${BUILD_NAME}.framework.js`,
-            codeUrl: `${BUILD_URL}/${BUILD_NAME}.wasm`,
+            dataUrl: `${BUILD_URL}/${BUILD_NAME}.data.unityweb`,
+            frameworkUrl: `${BUILD_URL}/${BUILD_NAME}.framework.js.unityweb`,
+            codeUrl: `${BUILD_URL}/${BUILD_NAME}.wasm.unityweb`,
             streamingAssetsUrl: "StreamingAssets",
             companyName: "NightfallPain",
             productName: "Nightfall Pain",
