@@ -1,0 +1,3 @@
+# Unity WebGL build output — never touch line endings, these are binary/generated.
+public/game/Build/* -text -diff
+public/fonts/* binary
