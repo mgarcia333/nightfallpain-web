@@ -45,6 +45,7 @@ export default function UnityGame() {
             companyName: "NightfallPain",
             productName: "Nightfall Pain",
             productVersion: "1.0",
+            devicePixelRatio: window.devicePixelRatio || 1,
           },
           (p) => setProgress(p)
         )
@@ -68,6 +69,8 @@ export default function UnityGame() {
         id="unity-canvas"
         tabIndex={-1}
         ref={canvasRef}
+        width={1920}
+        height={1080}
         className="w-full h-full block"
         style={{ visibility: ready ? "visible" : "hidden" }}
       />
