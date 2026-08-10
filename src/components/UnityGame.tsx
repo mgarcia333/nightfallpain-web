@@ -65,6 +65,8 @@ export default function UnityGame() {
   return (
     <div className="relative w-full aspect-video max-w-5xl mx-auto bg-black rounded-lg overflow-hidden panel-border">
       <canvas
+        id="unity-canvas"
+        tabIndex={-1}
         ref={canvasRef}
         className="w-full h-full block"
         style={{ visibility: ready ? "visible" : "hidden" }}
