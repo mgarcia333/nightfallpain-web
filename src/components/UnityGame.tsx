@@ -6,6 +6,11 @@ import { useEffect, useRef, useState } from "react";
 // Unity with Build Name "NightfallPain" (File > Build Settings > WebGL > Build).
 const BUILD_NAME = "NightfallPain";
 const BUILD_URL = "/game/Build";
+const LOADER_SRC = `${BUILD_URL}/${BUILD_NAME}.loader.js`;
+
+interface UnityInstance {
+  Quit: () => Promise<void>;
+}
 
 declare global {
   interface Window {
@@ -13,23 +18,27 @@ declare global {
       canvas: HTMLCanvasElement,
       config: Record<string, unknown>,
       onProgress?: (progress: number) => void
-    ) => Promise<{ Quit: () => Promise<void> }>;
+    ) => Promise<UnityInstance>;
   }
 }
 
 export default function UnityGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const instanceRef = useRef<UnityInstance | null>(null);
+  // Guards against React Strict Mode's dev-only double-invoke of effects,
+  // which would otherwise start the WASM download twice and abort the
+  // first (real) attempt when the script tag got removed mid-fetch.
+  const startedRef = useRef(false);
   const [progress, setProgress] = useState(0);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || startedRef.current) return;
+    startedRef.current = true;
 
-    const script = document.createElement("script");
-    script.src = `${BUILD_URL}/${BUILD_NAME}.loader.js`;
-    script.onload = () => {
+    const startGame = () => {
       if (!window.createUnityInstance) {
         setError("No se pudo inicializar el motor del juego.");
         return;
@@ -49,17 +58,36 @@ export default function UnityGame() {
           },
           (p) => setProgress(p)
         )
-        .then(() => setReady(true))
+        .then((instance) => {
+          instanceRef.current = instance;
+          setReady(true);
+        })
         .catch((err: unknown) => {
           console.error(err);
           setError("No se pudo cargar el juego. Comprueba que la build WebGL este publicada.");
         });
     };
-    script.onerror = () => setError("No se encontro la build del juego en /game/Build.");
-    document.body.appendChild(script);
+
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${LOADER_SRC}"]`);
+    if (existing) {
+      if (window.createUnityInstance) {
+        startGame();
+      } else {
+        existing.addEventListener("load", startGame, { once: true });
+      }
+    } else {
+      const script = document.createElement("script");
+      script.src = LOADER_SRC;
+      script.onload = startGame;
+      script.onerror = () => setError("No se encontro la build del juego en /game/Build.");
+      document.body.appendChild(script);
+    }
 
     return () => {
-      document.body.removeChild(script);
+      // Real unmount only: quit the running instance to free memory/audio.
+      // We deliberately never remove the loader <script> here — doing so
+      // is what aborted the WASM streaming fetch under Strict Mode.
+      instanceRef.current?.Quit().catch(() => {});
     };
   }, []);
 
